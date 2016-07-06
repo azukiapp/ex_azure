@@ -1,0 +1,2 @@
+%{"erlazure": {:git, "https://github.com/gullitmiranda/erlazure.git", "9c23921d0a64c954da93b98477743bbd3eac9cdc", []},
+  "jsx": {:git, "git://github.com/talentdeficit/jsx.git", "3074d4865b3385a050badf7828ad31490d860df5", [ref: "master"]}}
