@@ -4,7 +4,7 @@ defmodule ExAzure.Mixfile do
   def project do
     [
       app:             :ex_azure,
-      version:         "0.1.0",
+      version:         "0.1.1",
       elixir:          "~> 1.2 or ~> 1.3",
       description:     "Azure wrapper for Elixir using :erlazure",
       package:         package,

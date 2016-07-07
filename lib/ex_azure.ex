@@ -2,7 +2,10 @@ defmodule ExAzure do
   @moduledoc File.read!("#{__DIR__}/../README.md")
   use Application
 
-  alias ExAzure.Server
+  alias ExAzure.{
+    Server,
+    Utils,
+  }
 
   def defaults(config) do
     config
@@ -37,12 +40,15 @@ defmodule ExAzure do
   end
 
   defp do_request(action, args, opts) when is_atom(action) do
-    args = Enum.map(args, &to_charlist(&1))
+    args = args |> Utils.normalize_to_charlist
 
     client = opts |> Dict.get(:client, client)
     apply(:erlazure, action, [client] ++ args)
     |> parse_response
   end
+
+  defp parse_response({:error, _} = response), do: response
+  defp parse_response({:ok   , _} = response), do: response
 
   defp parse_response({body, headers}) do
     %{ body: body, headers: headers }
