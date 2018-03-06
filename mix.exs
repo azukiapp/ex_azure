@@ -7,7 +7,7 @@ defmodule ExAzure.Mixfile do
       version:         "0.1.1",
       elixir:          "~> 1.2 or ~> 1.3",
       description:     "Azure wrapper for Elixir using :erlazure",
-      package:         package,
+      package:         package(),
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps:            deps(),
