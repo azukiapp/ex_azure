@@ -42,7 +42,7 @@ defmodule ExAzure do
   defp do_request(action, args, opts) when is_atom(action) do
     args = args |> Utils.normalize_to_charlist
 
-    client = opts |> Dict.get(:client, client)
+    client = opts |> Dict.get(:client, client())
     apply(:erlazure, action, [client] ++ args)
     |> parse_response
   end
