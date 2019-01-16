@@ -9,8 +9,8 @@ defmodule ExAzure do
 
   def defaults(config) do
     config
-    |> Dict.put_new(:account   , Application.get_env(:ex_azure, :account   ))
-    |> Dict.put_new(:access_key, Application.get_env(:ex_azure, :access_key))
+    |> Dict.put_new(:account   , config_to_binary(Application.get_env(:ex_azure, :account   )))
+    |> Dict.put_new(:access_key, config_to_binary(Application.get_env(:ex_azure, :access_key)))
   end
 
   def config do
@@ -73,4 +73,7 @@ defmodule ExAzure do
   def stop(_state) do
     :ok
   end
+
+  defp config_to_binary({:system, env_var}), do: config_to_binary(System.get_env(env_var))
+  defp config_to_binary(config), do: config
 end
