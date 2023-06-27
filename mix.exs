@@ -16,7 +16,8 @@ defmodule ExAzure.Mixfile do
 
   def application do
     [applications: [:erlazure],
-     mod: {ExAzure, []}]
+    extra_applications: [:xmerl],
+    mod: {ExAzure, []}]
   end
 
   defp deps do
@@ -39,3 +40,4 @@ defmodule ExAzure.Mixfile do
     ]
   end
 end
+˜
