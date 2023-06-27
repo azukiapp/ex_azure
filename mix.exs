@@ -40,4 +40,3 @@ defmodule ExAzure.Mixfile do
     ]
   end
 end
-˜
