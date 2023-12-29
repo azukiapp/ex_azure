@@ -2,21 +2,24 @@ defmodule ExAzure.Utils do
   def normalize_to_charlist({k, v}) do
     {normalize_to_charlist(k), normalize_to_charlist(v)}
   end
+
   def normalize_to_charlist([h | t]) do
     [normalize_to_charlist(h) | normalize_to_charlist(t)]
   end
 
-  def normalize_to_charlist(term) do
-    with \
-      true <- String.valid?(term),
-      charlist <- Kernel.to_charlist(term),
-      true <- ascii_printable?(charlist)
-    do
+  def normalize_to_charlist(term) when is_binary(term) do
+    with true <- String.valid?(term),
+         charlist <- Kernel.to_charlist(term),
+         true <- ascii_printable?(charlist) do
       charlist
     else
       _ ->
         term
     end
+  end
+
+  def normalize_to_charlist(term) do
+    term
   end
 
   defp ascii_printable?(list, counter \\ :infinity)
@@ -26,7 +29,7 @@ defmodule ExAzure.Utils do
   end
 
   defp ascii_printable?([char | rest], counter)
-      when is_integer(char) and char >= 32 and char <= 126 do
+       when is_integer(char) and char >= 32 and char <= 126 do
     ascii_printable?(rest, decrement(counter))
   end
 
